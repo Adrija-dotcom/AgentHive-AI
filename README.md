@@ -1,6 +1,6 @@
 # 🛡️ AgentHive-AI: The Multi-Tasking Decision Agent
 
-AgentHive-AI is an autonomous reasoning agent built for the Hackolution 2K26 hackathon. It helps navigate complex strategic decisions by combining real-time web research, simulated pro/con debates, and tactical roadmap generation.
+AgentHive-AI is an autonomous reasoning agent built for an MLH Hackathon. It helps navigate complex strategic decisions by combining real-time web research, simulated pro/con debates, and tactical roadmap generation.
 
 ### 🚀 Key Features
 * **Live Research:** Uses DuckDuckGo to scrape current market data and trends.
