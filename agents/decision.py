@@ -2,16 +2,12 @@ def local_evidence_analysis(
     goal,
     categorized_results
 ):
-
     category_stats = {
         category: len(sources)
-        for category, sources
-        in categorized_results.items()
+        for category, sources in categorized_results.items()
     }
 
-    total_sources = sum(
-        category_stats.values()
-    )
+    total_sources = sum(category_stats.values())
 
     categories_found = sum(
         1
@@ -37,7 +33,6 @@ def local_evidence_analysis(
 
 
 def build_evidence_digest(categorized_results):
-
     digest = []
 
     for category, sources in categorized_results.items():
@@ -47,22 +42,23 @@ def build_evidence_digest(categorized_results):
         )
 
         if not sources:
-            digest.append(
-                "No usable evidence found."
-            )
+            digest.append("No usable evidence found.")
             continue
 
-        for index, source in enumerate(
-            sources,
-            start=1
-        ):
+        for index, source in enumerate(sources, start=1):
+
+            # Keep Gemini's input compact.
+            snippet = source.get("snippet", "").strip()
+
+            if len(snippet) > 500:
+                snippet = snippet[:500] + "..."
 
             digest.append(
                 f"""
 [{category} Source {index}]
-Title: {source["title"]}
-URL: {source["url"]}
-Evidence snippet: {source["snippet"]}
+Title: {source.get("title", "")}
+URL: {source.get("url", "")}
+Evidence: {snippet}
 """
             )
 
@@ -73,7 +69,6 @@ def demo_decision(
     goal,
     categorized_results
 ):
-
     analysis = local_evidence_analysis(
         goal,
         categorized_results
@@ -88,22 +83,15 @@ def demo_decision(
     for category, sources in categorized_results.items():
 
         if sources:
-
             evidence_summary.append(
-                f"- **{category}:** "
-                f"{len(sources)} sources collected"
+                f"- **{category}:** {len(sources)} sources collected"
             )
-
         else:
-
             evidence_summary.append(
-                f"- **{category}:** "
-                "No usable sources found"
+                f"- **{category}:** No usable sources found"
             )
 
-    evidence_text = "\n".join(
-        evidence_summary
-    )
+    evidence_text = "\n".join(evidence_summary)
 
     return f"""
 ## 🎯 Recommendation
@@ -291,7 +279,6 @@ def decision_agent(
     goal,
     categorized_results
 ):
-
     if not model:
         return None, "no_api_key"
 
@@ -302,49 +289,28 @@ def decision_agent(
     prompt = f"""
 You are the Decision Intelligence Engine inside AgentHive.
 
-Transform external research evidence into an
-evidence-traceable decision report.
+Analyze the user's goal using ONLY the supplied research evidence.
 
 USER GOAL:
 {goal}
 
-EXTERNAL RESEARCH:
+RESEARCH EVIDENCE:
 {evidence_digest}
 
-IMPORTANT:
+Rules:
 
-Every important factual claim MUST reference one or more supplied
-sources.
+- Do not invent facts.
+- Do not invent statistics.
+- Do not invent sources.
+- Every factual claim must reference the supplied source label.
+- Clearly distinguish evidence from interpretation and assumptions.
+- If evidence is weak, say so.
 
-Use exact labels such as:
-
-[Market Source 1]
-[Competitors Source 2]
-[Technology Source 3]
-[Funding Source 1]
-[Risks Source 4]
-
-Never invent a source.
-
-Never create a citation for information not supported by the
-supplied evidence.
-
-Do not invent statistics.
-
-Distinguish between:
-
-1. Evidence-backed findings
-2. Reasonable interpretation
-3. Assumptions requiring validation
-
-If evidence is weak or conflicting, explicitly say so.
-
-Return:
+Return a concise professional report with:
 
 ## 🎯 Recommendation
 
 Choose:
-
 - Proceed
 - Proceed cautiously
 - Validate further
@@ -354,58 +320,42 @@ Explain why.
 
 ## 🔎 Evidence Summary
 
-### Market
-
-### Competitors
-
-### Technology
-
-### Funding
-
-### Risks
+Cover:
+- Market
+- Competitors
+- Technology
+- Funding
+- Risks
 
 Use source labels.
 
 ## 🚀 Opportunity Analysis
 
-Separate evidence-backed opportunities from opportunities requiring
-validation.
+Identify evidence-backed opportunities.
 
 ## 🛡️ Risk Audit
 
-Analyze:
-
+Cover:
 - Technical
 - Market
 - Competitive
 - Regulatory
 - Execution
 
-For each major risk:
-
-Risk → Evidence → Why it matters → Mitigation
+Use:
+Risk → Evidence → Mitigation
 
 ## 🧠 Assumption Audit
 
 Identify the 3 most important assumptions.
 
-For each:
-
-Assumption → Existing evidence → Validation method
-
 ## 📋 Priority Actions
 
-Give exactly 3 specific actions.
+Give exactly 3 actions.
 
 ## 🗓️ 30-Day Roadmap
 
-### Week 1
-
-### Week 2
-
-### Week 3
-
-### Week 4
+Give one focus for each week.
 
 ## 📊 Success Metrics
 
@@ -414,15 +364,10 @@ Give measurable indicators.
 ## 🔐 Final Decision Framework
 
 Research → Validate → Prototype → Test → Measure → Scale
-
-Keep the report professional and concise.
 """
 
     try:
-
-        response = model.generate_content(
-            prompt
-        )
+        response = model.generate_content(prompt)
 
         if not response or not response.text:
             return None, "empty_response"
