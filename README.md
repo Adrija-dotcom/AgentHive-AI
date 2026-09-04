@@ -1,145 +1,217 @@
-# 🤖 AgentHive-AI — Multi-Agent Decision Intelligence System
+# 🤖 AgentHive AI
 
-AgentHive-AI is a **modular AI-powered decision intelligence system** that transforms complex goals into structured, evidence-backed strategic recommendations.
+### Multi-Agent Decision Intelligence & Research System
 
-Instead of relying on a single AI response, AgentHive separates the workflow into specialized stages:
+AgentHive AI is a research-driven decision intelligence platform that transforms complex goals into structured, evidence-backed strategic analysis.
+
+Instead of relying on a single response, AgentHive decomposes a decision into multiple research dimensions, gathers live web evidence, organizes the findings, and produces a structured decision report.
 
 **Research → Evidence → Analyze → Audit → Plan**
 
-The system combines **live web research, evidence traceability, AI reasoning, risk analysis, assumption auditing, and strategic planning** in a single Streamlit application.
+---
+
+## 🚀 What AgentHive Does
+
+Given a complex question such as:
+
+> **"Should I build an AI startup in India?"**
+
+AgentHive performs a structured research pipeline covering:
+
+* 🔎 Market analysis
+* 🏢 Competitor analysis
+* ⚙️ Technology analysis
+* 💰 Funding analysis
+* ⚠️ Risk analysis
+
+The collected evidence is then transformed into a strategic decision report containing:
+
+* Recommendation
+* Evidence coverage
+* Opportunity analysis
+* Risk audit
+* Assumption audit
+* Priority actions
+* 30-day roadmap
+* Success metrics
+* Evidence traceability
 
 ---
 
-## 🚀 Why AgentHive?
+## 🧠 Multi-Agent Architecture
 
-Complex decisions often require more than generating an answer.
+AgentHive separates the workflow into specialized components.
 
-AgentHive is designed to answer:
-
-* What does current external evidence suggest?
-* Who are the competitors?
-* What technologies and implementation approaches exist?
-* What funding or business opportunities are relevant?
-* What risks could prevent success?
-* Which assumptions still need validation?
-* What should be done next?
-
-The goal is to turn scattered research into a **structured decision-making workflow**.
-
----
-
-## 🧠 Agent Architecture
-
-```mermaid
-flowchart TD
-    A[User Goal] --> B[Research Agent]
-
-    B --> C[Market Research]
-    B --> D[Competitor Research]
-    B --> E[Technology Research]
-    B --> F[Funding Research]
-    B --> G[Risk Research]
-
-    C --> H[Evidence Aggregator]
-    D --> H
-    E --> H
-    F --> H
-    G --> H
-
-    H --> I[Decision Intelligence]
-
-    I --> J[Opportunity Analysis]
-    I --> K[Risk Audit]
-    I --> L[Assumption Audit]
-    I --> M[Priority Actions]
-    I --> N[30-Day Roadmap]
-
-    H --> O[Evidence Traceability]
-
-    I --> P[Strategic Recommendation]
+```text
+                    ┌─────────────────────┐
+                    │      User Goal      │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │  Research Agent     │
+                    └──────────┬──────────┘
+                               │
+                ┌──────────────┼──────────────┐
+                │              │              │
+                ▼              ▼              ▼
+             Market       Competitors    Technology
+                │              │              │
+                └──────────────┼──────────────┘
+                               │
+                ┌──────────────┼──────────────┐
+                │              │              │
+                ▼              ▼              ▼
+             Funding         Risks       Evidence
+                │              │         Aggregation
+                └──────────────┼──────────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Decision Intelligence│
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │    Risk Auditor     │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Strategic Planner   │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Structured Decision │
+                    │      Report         │
+                    └─────────────────────┘
 ```
 
 ---
 
-## 🔎 Research Pipeline
+## 🔎 Research Dimensions
 
-AgentHive automatically investigates five research dimensions:
+AgentHive currently investigates five dimensions.
 
-| Dimension          | Purpose                                                           |
-| ------------------ | ----------------------------------------------------------------- |
-| 📈 **Market**      | Demand, trends, opportunities, customer needs                     |
-| 🏢 **Competitors** | Existing companies, products, alternatives, differentiation       |
-| ⚙️ **Technology**  | Technical trends, tools, platforms, implementation considerations |
-| 💰 **Funding**     | Investment, grants, accelerators, partnerships                    |
-| 🛡️ **Risks**      | Technical, market, competitive, regulatory, and execution risks   |
+### 1. Market
 
-The research layer uses **live web search** and returns structured sources containing:
+Analyzes:
 
-* Source title
-* URL
-* Evidence snippet
-* Stable source identifier
+* Market trends
+* Customer needs
+* Demand signals
+* Growth opportunities
+* Industry landscape
+
+### 2. Competitors
+
+Investigates:
+
+* Existing companies
+* Products
+* Alternatives
+* Market leaders
+* Competitive differentiation
+
+### 3. Technology
+
+Analyzes:
+
+* Technology trends
+* Tools and platforms
+* Technical developments
+* AI innovation
+* Implementation considerations
+
+### 4. Funding
+
+Investigates:
+
+* Startup funding
+* Venture capital
+* Grants
+* Accelerators
+* Partnerships
+* Investment opportunities
+
+### 5. Risks
+
+Audits:
+
+* Technical risks
+* Market risks
+* Competitive risks
+* Regulatory risks
+* Execution challenges
 
 ---
 
 ## 🔗 Evidence Traceability
 
-One of AgentHive's core design goals is **traceable reasoning**.
+One of AgentHive's core design principles is **traceable evidence**.
 
-Each research source receives a stable identifier such as:
+Every usable research result receives a stable identifier:
 
 ```text
 Market Source 1
-Competitors Source 2
+Market Source 2
+Competitors Source 1
 Technology Source 3
 Funding Source 1
-Risks Source 4
+Risks Source 2
 ```
 
-The AI decision engine receives these sources directly and is instructed to reference them when making factual claims.
+This allows research findings to be connected back to the original source.
 
-This creates an explicit relationship between:
+Each source includes:
 
-**Research → Evidence → Reasoning → Decision**
+* Title
+* URL
+* Evidence snippet
+* Stable source identifier
 
-The system also distinguishes between:
-
-* **Evidence-backed findings**
-* **Reasonable interpretations**
-* **Assumptions requiring validation**
+Users can open the original source directly from the application.
 
 ---
 
 ## 🧠 Decision Intelligence
 
-AgentHive supports two execution modes.
+AgentHive does not treat search results as automatic truth.
 
-### Gemini AI
+The decision engine separates:
 
-Uses the Gemini API to synthesize collected research into an evidence-aware decision report.
+### Evidence
 
-The generated analysis includes:
+Information directly supported by collected sources.
 
-### 🎯 Strategic Recommendation
+### Interpretation
 
-One of:
+Reasonable conclusions derived from the available evidence.
 
-* Proceed
-* Proceed cautiously
-* Validate further
-* Avoid
+### Assumptions
 
-### 🔎 Evidence Summary
+Claims that still require validation.
 
-Organized by the five research dimensions.
+This distinction helps prevent unsupported conclusions from being presented as established facts.
 
-### 🚀 Opportunity Analysis
+---
 
-Separates evidence-backed opportunities from opportunities requiring further validation.
+## 🛡️ Risk Audit
 
-### 🛡️ Risk Audit
+The system evaluates major decision risks using the structure:
 
-Analyzes:
+```text
+Risk
+ ↓
+Evidence
+ ↓
+Why it matters
+ ↓
+Mitigation
+```
+
+The current framework covers:
 
 * Technical risk
 * Market risk
@@ -147,62 +219,89 @@ Analyzes:
 * Regulatory risk
 * Execution risk
 
-Each major risk is evaluated using:
+---
 
-**Risk → Evidence → Why it matters → Mitigation**
+## 🧠 Assumption Audit
 
-### 🧠 Assumption Audit
+AgentHive identifies important assumptions that could invalidate a decision.
 
-Identifies important assumptions and proposes ways to validate them.
+Examples include:
 
-### 📋 Priority Actions
+1. Target users actually experience the problem.
+2. Existing solutions do not completely solve the problem.
+3. Users are willing to adopt the proposed solution.
 
-Produces three concrete next actions.
-
-### 🗓️ 30-Day Roadmap
-
-Breaks execution into:
-
-* Week 1 — Research & Validation
-* Week 2 — Prototype
-* Week 3 — Testing
-* Week 4 — Evaluation
-
-### 📊 Success Metrics
-
-Suggests measurable indicators for evaluating progress.
+These assumptions are explicitly presented as assumptions rather than facts.
 
 ---
 
-## 🧪 Demo Mode & Automatic Fallback
+## 📋 Strategic Planning
 
-AgentHive also includes a **Demo Mode**.
+AgentHive converts research into actionable next steps.
 
-Demo Mode performs live web research without consuming Gemini API requests and generates a local evidence-based strategic analysis.
+### Priority Actions
 
-If Gemini becomes unavailable because of:
+The system identifies three immediate actions focused on:
 
-* API quota limits
-* Missing API configuration
-* API errors
+1. Problem validation
+2. Competitive analysis
+3. MVP development
 
-AgentHive automatically falls back to Demo Mode.
+### 30-Day Roadmap
 
-This keeps the application usable even when the AI service is unavailable.
+```text
+Week 1 → Research & Validation
+Week 2 → Prototype
+Week 3 → Testing
+Week 4 → Evaluation
+```
 
 ---
 
-## 🛠️ Tech Stack
+## 📊 Success Metrics
 
-| Technology            | Purpose                       |
-| --------------------- | ----------------------------- |
-| **Python 3.12+**      | Core application              |
-| **Streamlit**         | Interactive web interface     |
-| **Google Gemini API** | AI-powered decision synthesis |
-| **DDGS**              | Live web research             |
-| **python-dotenv**     | Environment configuration     |
-| **Pytest**            | Automated testing             |
-| **GitHub Actions**    | Continuous Integration        |
+AgentHive recommends measurable indicators such as:
+
+* Validated assumptions
+* Users interviewed
+* Prototype completion
+* Task success rate
+* User feedback
+* Technical failure rate
+* Development time
+* Estimated operating cost
+
+---
+
+## 🏗️ Technology Stack
+
+### Frontend / Application
+
+* Python
+* Streamlit
+
+### Research
+
+* DDGS
+* Live web search
+
+### Decision Engine
+
+* Python-based rule-driven decision intelligence
+* Evidence aggregation
+* Structured analysis
+
+### Testing
+
+* Pytest
+
+### CI/CD
+
+* GitHub Actions
+
+### Deployment
+
+* Streamlit Community Cloud
 
 ---
 
@@ -223,7 +322,6 @@ AgentHive-AI/
 │
 ├── services/
 │   ├── __init__.py
-│   ├── gemini.py
 │   └── search.py
 │
 ├── tests/
@@ -237,197 +335,209 @@ AgentHive-AI/
 └── README.md
 ```
 
-### Responsibilities
+---
 
-**`agents/researcher.py`**
+## ⚙️ How the Pipeline Works
 
-Handles research dimensions and source identification.
+The complete workflow is:
 
-**`agents/decision.py`**
-
-Handles evidence analysis, evidence digest generation, Demo Mode reasoning, and Gemini decision synthesis.
-
-**`agents/orchestrator.py`**
-
-Coordinates the overall AgentHive workflow.
-
-**`services/search.py`**
-
-Provides the web search service.
-
-**`services/gemini.py`**
-
-Handles Gemini configuration and AI generation utilities.
-
-**`app.py`**
-
-Provides the Streamlit application interface.
-
-**`tests/test_pipeline.py`**
-
-Contains automated tests for the research and evidence pipeline.
+```text
+1. User enters a complex goal
+              ↓
+2. Research Agent decomposes the goal
+              ↓
+3. Five research dimensions are investigated
+              ↓
+4. External sources are collected
+              ↓
+5. Evidence is categorized
+              ↓
+6. Stable source IDs are assigned
+              ↓
+7. Decision Intelligence analyzes the evidence
+              ↓
+8. Risks and assumptions are audited
+              ↓
+9. Priority actions are generated
+              ↓
+10. 30-day strategic roadmap is produced
+```
 
 ---
 
-## 🧪 Testing & Continuous Integration
+## 🧪 Testing
 
-AgentHive includes automated tests using **Pytest**.
+AgentHive includes automated tests covering core pipeline functionality.
 
-The repository also uses **GitHub Actions** to automatically run the test suite when changes are pushed or pull requests are created.
+Run:
 
-CI pipeline:
+```bash
+pytest -q
+```
+
+Current test coverage verifies:
+
+* Source numbering
+* Evidence analysis
+* Evidence digest generation
+
+The current test suite passes successfully.
+
+---
+
+## 🔄 Continuous Integration
+
+GitHub Actions automatically runs the test suite when changes are pushed to the repository.
+
+Pipeline:
 
 ```text
-Checkout Repository
-        ↓
-Set Up Python 3.12
-        ↓
+Git Push
+   ↓
+GitHub Actions
+   ↓
 Install Dependencies
-        ↓
+   ↓
 Run Pytest
-        ↓
+   ↓
 Pass / Fail
 ```
 
-This ensures that core functionality is automatically validated instead of relying only on manual testing.
-
----
-
-## 💻 Local Setup
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/Adrija-dotcom/AgentHive-AI.git
-cd AgentHive-AI
-```
-
-### 2. Create a virtual environment
-
-```bash
-python -m venv venv
-```
-
-Activate it on Windows:
-
-```powershell
-venv\Scripts\activate
-```
-
-### 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Configure Gemini
-
-Create a `.env` file:
-
-```text
-GEMINI_API_KEY=your_api_key_here
-```
-
-**Never commit your API key to GitHub.**
-
-The repository's `.gitignore` is configured to prevent `.env` files from being committed.
-
-### 5. Run AgentHive
-
-```bash
-streamlit run app.py
-```
-
-The application will open in your browser.
+This provides a basic automated quality gate before changes are considered production-ready.
 
 ---
 
 ## 🔐 Security Considerations
 
-AgentHive is designed with basic secret-management practices:
+AgentHive does not require users to provide sensitive credentials to perform its core research workflow.
 
-* API keys are stored through environment variables.
-* `.env` files are excluded from Git.
-* Gemini credentials are not hard-coded into the application.
-* External research is treated as evidence rather than automatically trusted truth.
+The application:
 
-For production deployment, additional controls such as secret managers, authentication, rate limiting, logging, and stronger source validation should be implemented.
+* Does not require a personal API key
+* Does not store user passwords
+* Does not require authentication credentials
+* Uses publicly accessible web research
+* Keeps application configuration separate from source code
+
+Secrets and environment-specific configuration should never be committed to Git.
 
 ---
 
 ## 🎯 Example Use Cases
 
-AgentHive can be used for questions such as:
+AgentHive can be used to investigate questions such as:
 
-```text
-Should I build an AI cybersecurity startup in India?
+### Startup Strategy
 
-Should a startup expand into the US market?
+> Should I build an AI healthcare startup in India?
 
-Which technology stack should I choose for a new product?
+### Technology Adoption
 
-Should a company build or buy a particular technology?
+> Should our company adopt an open-source LLM?
 
-What are the risks of launching this product?
+### Product Strategy
 
-Which market opportunity should a startup prioritize?
-```
+> Should I build a productivity app for college students?
 
-The system is designed to work with **open-ended strategic goals**, rather than a fixed question-answer dataset.
+### Market Entry
 
----
+> Should a SaaS company expand into the Indian market?
 
-## 🗺️ Development Roadmap
+### Career Decisions
 
-### ✅ Completed
+> Should I pursue a career in AI engineering?
 
-* Modular agent architecture
-* Live web research
-* Five research dimensions
-* Evidence traceability
-* Gemini integration
-* Demo Mode
-* Automatic Gemini fallback
-* Strategic recommendation generation
-* Risk and assumption analysis
-* Automated tests
-* GitHub Actions CI
-
-### 🔜 Future Improvements
-
-* Persistent research history
-* Source credibility scoring
-* Multi-model reasoning
-* Parallel agent execution
-* Structured decision scoring
-* User authentication
-* Production deployment
-* Database-backed research storage
-* More comprehensive test coverage
-* Observability and execution tracing
+The system is designed for questions where multiple sources, competing factors, risks, and assumptions need to be considered together.
 
 ---
 
-## 👩‍💻 Project
+## 🌟 Why AgentHive?
 
-**AgentHive-AI**
+Traditional search provides information.
 
-Built as an AI/agentic systems project exploring how specialized research and reasoning components can work together to support complex decisions.
+Traditional chatbots provide answers.
 
-### Core Philosophy
+AgentHive is designed to connect:
 
 ```text
-Research
-   ↓
+Information
+     ↓
 Evidence
-   ↓
-Analyze
-   ↓
-Audit
-   ↓
-Plan
-   ↓
-Decide
+     ↓
+Analysis
+     ↓
+Risk Assessment
+     ↓
+Strategic Action
 ```
 
-> **Don't just generate an answer. Build an evidence-backed decision process.**
+The goal is not simply to produce an answer.
+
+The goal is to create a **structured decision-making workflow that can be inspected and traced back to evidence.**
+
+---
+
+## 🚧 Current Limitations
+
+AgentHive is a research and decision-support prototype.
+
+Its recommendations should not be treated as professional financial, legal, medical, or investment advice.
+
+Search engines may occasionally return:
+
+* No results
+* Duplicate sources
+* Low-quality sources
+* Temporarily unavailable sources
+
+Research coverage can therefore vary between runs.
+
+---
+
+## 🔮 Future Roadmap
+
+Potential future improvements include:
+
+* More research agents
+* Improved source quality scoring
+* Source credibility ranking
+* Parallel research execution
+* Persistent research history
+* PDF/report export
+* Interactive decision dashboards
+* User-defined research dimensions
+* More advanced evidence synthesis
+* Evaluation benchmarks for decision quality
+
+---
+
+## 💡 Design Philosophy
+
+AgentHive follows a simple principle:
+
+> **Research before reasoning. Evidence before conclusions. Validation before scaling.**
+
+The system is intentionally designed so that uncertainty and assumptions remain visible rather than being hidden behind confident-sounding recommendations.
+
+---
+
+## 👩‍💻 Author
+
+**Adrija Saha**
+
+BCA — Institute of Engineering & Management, Kolkata
+
+Interested in:
+
+* Artificial Intelligence
+* Generative AI
+* Software Engineering
+* Multi-Agent Systems
+* Decision Intelligence
+* Research Engineering
+
+---
+
+## 📜 License
+
+This project is intended for educational, research, and portfolio purposes.
