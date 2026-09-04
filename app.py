@@ -1,16 +1,8 @@
-import os
-
 import streamlit as st
-from dotenv import load_dotenv
 
 from agents.orchestrator import run_agenthive
 from agents.researcher import number_sources
-from services.gemini import configure_gemini
 
-
-# =========================================================
-# PAGE CONFIGURATION
-# =========================================================
 
 st.set_page_config(
     page_title="AgentHive AI",
@@ -19,81 +11,9 @@ st.set_page_config(
 )
 
 
-# =========================================================
-# CONFIGURATION
-# =========================================================
-
-load_dotenv()
-
-try:
-    API_KEY = st.secrets["GEMINI_API_KEY"]
-except Exception:
-    API_KEY = os.getenv("GEMINI_API_KEY")
-
-
-MODEL_NAME = "gemini-3.7-flash"
-
-model = configure_gemini(
-    API_KEY,
-    MODEL_NAME
-)
-
-
-# =========================================================
-# SIDEBAR
-# =========================================================
-
-with st.sidebar:
-
-    st.header("⚙️ AgentHive Configuration")
-
-    execution_mode = st.radio(
-        "Execution Mode",
-        [
-            "Demo Mode",
-            "Gemini AI"
-        ],
-        index=0
-    )
-
-    st.markdown("---")
-
-    st.markdown("### 🧠 Agent Pipeline")
-
-    st.write("🔎 Research Agent")
-    st.write("📚 Evidence Aggregator")
-    st.write("🧠 Decision Intelligence")
-    st.write("🛡️ Risk Auditor")
-    st.write("📋 Strategic Planner")
-
-    st.markdown("---")
-
-    if execution_mode == "Demo Mode":
-
-        st.info(
-            "Demo Mode performs live web research "
-            "without using Gemini API requests."
-        )
-
-    else:
-
-        if API_KEY:
-
-            st.success(
-                "Gemini API configured."
-            )
-
-        else:
-
-            st.warning(
-                "Gemini API unavailable. "
-                "AgentHive will automatically use Demo Mode."
-            )
-
-
-# =========================================================
-# HEADER
-# =========================================================
+# ---------------------------------------------------------
+# PAGE HEADER
+# ---------------------------------------------------------
 
 st.title("🤖 AgentHive AI")
 
@@ -112,9 +32,39 @@ analysis, risk auditing, and strategic planning**.
 st.markdown("---")
 
 
-# =========================================================
+# ---------------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------------
+
+with st.sidebar:
+
+    st.header("⚙️ AgentHive Configuration")
+
+    st.success(
+        "🧪 Demo Mode — Live Research"
+    )
+
+    st.markdown("---")
+
+    st.markdown("### 🧠 Agent Pipeline")
+
+    st.write("🔎 Research Agent")
+    st.write("📚 Evidence Aggregator")
+    st.write("🧠 Decision Intelligence")
+    st.write("🛡️ Risk Auditor")
+    st.write("📋 Strategic Planner")
+
+    st.markdown("---")
+
+    st.info(
+        "AgentHive performs live web research and generates "
+        "strategic analysis locally without requiring an AI API key."
+    )
+
+
+# ---------------------------------------------------------
 # USER INPUT
-# =========================================================
+# ---------------------------------------------------------
 
 goal = st.text_input(
     "🎯 Enter a complex goal or decision",
@@ -124,9 +74,9 @@ goal = st.text_input(
 )
 
 
-# =========================================================
+# ---------------------------------------------------------
 # EXECUTION
-# =========================================================
+# ---------------------------------------------------------
 
 if st.button(
     "🚀 Activate AgentHive",
@@ -175,9 +125,7 @@ if st.button(
 
 
             results = run_agenthive(
-                goal,
-                execution_mode,
-                model
+                goal
             )
 
 
@@ -219,51 +167,28 @@ if st.button(
             st.stop()
 
 
-    # =====================================================
-    # STATUS
-    # =====================================================
+# ---------------------------------------------------------
+# EXECUTION STATUS
+# ---------------------------------------------------------
 
-    if results["mode"] == "Gemini AI":
-
-        st.success(
-            "🧠 Gemini AI analysis completed "
-            "with evidence traceability."
-        )
-
-    elif results["mode"] == "Demo Mode (Automatic Fallback)":
-
-        if results["status"] == "quota":
-
-            st.warning(
-                "⚠️ Gemini quota unavailable. "
-                "AgentHive automatically switched to Demo Mode."
-            )
-
-        else:
-
-            st.warning(
-                "⚠️ Gemini unavailable. "
-                "AgentHive automatically switched to Demo Mode."
-            )
-
-    else:
-
-        st.info(
-            "🧪 Demo Mode — live research was performed; "
-            "Gemini API was not used."
-        )
+    st.success(
+        "🧪 AgentHive completed live research and "
+        "generated the decision analysis."
+    )
 
 
-    # =====================================================
-    # RESEARCH METRICS
-    # =====================================================
+# ---------------------------------------------------------
+# RESEARCH METRICS
+# ---------------------------------------------------------
 
     research = results["research"]
+
 
     total_sources = sum(
         len(sources)
         for sources in research.values()
     )
+
 
     categories_found = sum(
         1
@@ -295,19 +220,15 @@ if st.button(
 
         st.metric(
             "Execution Mode",
-            results["mode"].replace(
-                " (Automatic Fallback)",
-                ""
-            )
+            "Live Research"
         )
 
 
+# ---------------------------------------------------------
+# STRATEGIC RECOMMENDATION
+# ---------------------------------------------------------
+
     st.markdown("---")
-
-
-    # =====================================================
-    # STRATEGIC DECISION
-    # =====================================================
 
     st.subheader(
         "🏁 Strategic Recommendation"
@@ -318,9 +239,9 @@ if st.button(
     )
 
 
-    # =====================================================
-    # EVIDENCE TRACEABILITY
-    # =====================================================
+# ---------------------------------------------------------
+# EVIDENCE TRACEABILITY
+# ---------------------------------------------------------
 
     st.markdown("---")
 
@@ -376,9 +297,9 @@ if st.button(
                     st.markdown("---")
 
 
-# =========================================================
+# ---------------------------------------------------------
 # FOOTER
-# =========================================================
+# ---------------------------------------------------------
 
 st.markdown("---")
 
