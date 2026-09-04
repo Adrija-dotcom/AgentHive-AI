@@ -33,6 +33,10 @@ def local_evidence_analysis(
 
 
 def build_evidence_digest(categorized_results):
+    """
+    Build a compact evidence digest for Gemini.
+    """
+
     digest = []
 
     for category, sources in categorized_results.items():
@@ -42,14 +46,22 @@ def build_evidence_digest(categorized_results):
         )
 
         if not sources:
-            digest.append("No usable evidence found.")
+            digest.append(
+                "No usable evidence found."
+            )
             continue
 
-        for index, source in enumerate(sources, start=1):
+        for index, source in enumerate(
+            sources,
+            start=1
+        ):
 
-            # Keep Gemini's input compact.
-            snippet = source.get("snippet", "").strip()
+            snippet = source.get(
+                "snippet",
+                ""
+            ).strip()
 
+            # Keep Gemini's prompt smaller.
             if len(snippet) > 500:
                 snippet = snippet[:500] + "..."
 
@@ -58,7 +70,7 @@ def build_evidence_digest(categorized_results):
 [{category} Source {index}]
 Title: {source.get("title", "")}
 URL: {source.get("url", "")}
-Evidence: {snippet}
+Evidence snippet: {snippet}
 """
             )
 
@@ -69,6 +81,7 @@ def demo_decision(
     goal,
     categorized_results
 ):
+
     analysis = local_evidence_analysis(
         goal,
         categorized_results
@@ -83,15 +96,22 @@ def demo_decision(
     for category, sources in categorized_results.items():
 
         if sources:
+
             evidence_summary.append(
-                f"- **{category}:** {len(sources)} sources collected"
-            )
-        else:
-            evidence_summary.append(
-                f"- **{category}:** No usable sources found"
+                f"- **{category}:** "
+                f"{len(sources)} sources collected"
             )
 
-    evidence_text = "\n".join(evidence_summary)
+        else:
+
+            evidence_summary.append(
+                f"- **{category}:** "
+                "No usable sources found"
+            )
+
+    evidence_text = "\n".join(
+        evidence_summary
+    )
 
     return f"""
 ## 🎯 Recommendation
@@ -279,6 +299,7 @@ def decision_agent(
     goal,
     categorized_results
 ):
+
     if not model:
         return None, "no_api_key"
 
@@ -367,7 +388,10 @@ Research → Validate → Prototype → Test → Measure → Scale
 """
 
     try:
-        response = model.generate_content(prompt)
+
+        response = model.generate_content(
+            prompt
+        )
 
         if not response or not response.text:
             return None, "empty_response"
