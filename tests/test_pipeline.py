@@ -1,3 +1,11 @@
+import sys
+from pathlib import Path
+
+sys.path.insert(
+    0,
+    str(Path(__file__).resolve().parents[1])
+)
+
 from agents.decision import (
     local_evidence_analysis,
     build_evidence_digest,
