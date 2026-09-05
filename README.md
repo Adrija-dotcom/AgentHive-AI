@@ -37,6 +37,19 @@ The collected evidence is then transformed into a strategic decision report cont
 * Evidence traceability
 
 ---
+## Screenshots
+
+### 1. AgentHive AI Interface
+![AgentHive AI Interface](screenshots/01-agenthive-interface.png)
+
+### 2. Research Evidence
+![Research Evidence](screenshots/02-research-evidence.png)
+
+### 3. Decision Intelligence
+![Decision Intelligence](screenshots/03-decision-intelligence.png)
+
+### 4. Roadmap & Traceability
+![Roadmap & Traceability](screenshots/04-roadmap-traceability.png)
 
 ## 🧠 Multi-Agent Architecture
 
@@ -328,8 +341,6 @@ AgentHive-AI/
 │   └── test_pipeline.py
 │
 ├── app.py
-├── app_backup.py
-├── debug_models.py
 ├── requirements.txt
 ├── .gitignore
 └── README.md
